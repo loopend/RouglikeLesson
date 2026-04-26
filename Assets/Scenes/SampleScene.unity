@@ -82847,7 +82847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0
-  _animator: {fileID: 0}
+  _animator: {fileID: 1106614881}
   _joystick: {fileID: 0}
 --- !u!1 &1021451474
 GameObject:
