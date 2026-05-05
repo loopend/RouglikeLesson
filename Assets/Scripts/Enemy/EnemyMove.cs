@@ -23,6 +23,9 @@ public class EnemyMove : MonoBehaviour
 
     private void Move()
     {
+        float distance = Vector3.Distance(transform.position, _playerMovement.transform.position);
+        if (distance < 0.1f)
+            return;
         _direction = (_playerMovement.transform.position - transform.position).normalized;
         transform.position += _direction * (_moveSpeed * Time.deltaTime);
         _animator.SetFloat(name:"Horizontal", _direction.x);
