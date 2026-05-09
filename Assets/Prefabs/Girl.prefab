@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5018853738477703128}
   - component: {fileID: 8006617009055091044}
-  m_Layer: 0
+  - component: {fileID: 4152520998929964857}
+  - component: {fileID: 7439873011139176197}
+  - component: {fileID: 6833388851903968704}
+  m_Layer: 7
   m_Name: Girl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +51,78 @@ MonoBehaviour:
   _moveSpeed: 2
   _freezeTimer: 0
   _animator: {fileID: 4276495839556422694}
+--- !u!114 &4152520998929964857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402267022950624108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e3aec87badbdb4e86d7a483c6dc22a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 15
+  _currentHealth: 0
+--- !u!114 &7439873011139176197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402267022950624108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caf0d1f73298a543b3d8af1263161fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+--- !u!61 &6833388851903968704
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402267022950624108}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.03}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.46, y: 0.94}
+  m_EdgeRadius: 0
 --- !u!1 &6303799629459071445
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +134,7 @@ GameObject:
   - component: {fileID: 4653901285331966282}
   - component: {fileID: 5242409977384526813}
   - component: {fileID: 4276495839556422694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GirlSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +196,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1591285781, guid: 48c816f1319e65b4a8e9b67da6c39a91, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

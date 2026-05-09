@@ -83199,6 +83199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1476933583}
   - component: {fileID: 1476933584}
+  - component: {fileID: 1476933585}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -83237,6 +83238,20 @@ MonoBehaviour:
   _moveSpeed: 3
   _animator: {fileID: 1106614881}
   _joystick: {fileID: 398588812}
+--- !u!114 &1476933585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476933582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e49aa2c61b88b4b8530ad2d0b75f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _currentHealth: 0
 --- !u!1001 &1531726465
 PrefabInstance:
   m_ObjectHideFlags: 0
