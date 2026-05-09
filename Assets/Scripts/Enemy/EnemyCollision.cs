@@ -8,6 +8,7 @@ public class EnemyCollision : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerHealth player))
         {
             player.TakeDamage(_damage);
+            //player.OnHealthChanged ?. Invoke();
             gameObject.SetActive(false);
         }
     }
