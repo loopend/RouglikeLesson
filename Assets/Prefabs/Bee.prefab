@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1718817344400367404}
   - component: {fileID: 1362322900947614628}
+  - component: {fileID: 4430325792326918117}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -48,6 +49,20 @@ MonoBehaviour:
   _moveSpeed: 2
   _freezeTimer: 0
   _animator: {fileID: 3545872452206872808}
+--- !u!114 &4430325792326918117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234477373001123208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420cc827703882c4d82374aa7c5a292e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  Interval: 1
 --- !u!1 &2375807393532498416
 GameObject:
   m_ObjectHideFlags: 0
