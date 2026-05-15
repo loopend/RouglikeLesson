@@ -84010,6 +84010,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 0
+  _regenerationValue: 1
+  _regenerationDelay: 5
 --- !u!50 &1476933586
 Rigidbody2D:
   serializedVersion: 4
