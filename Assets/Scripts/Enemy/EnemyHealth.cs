@@ -17,9 +17,9 @@ public class EnemyHealth : ObjectHealth
         {
             yield break;
             float tickDamage = damage / 3f;
-            if(tickDamage < 1f)
+            if (tickDamage < 1f)
                 tickDamage = 1f;
-           float roundDamage =  Mathf.Round(tickDamage);
+            float roundDamage = Mathf.Round(tickDamage);
             for (int i = 0; i < 5; i++)
             {
                 TakeDamage(roundDamage);
