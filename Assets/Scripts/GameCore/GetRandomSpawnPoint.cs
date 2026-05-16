@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameCore
 {
-    public class GetRandomSpawnPoint : MonoBehaviour
+    public class GetRandomSpawnPoint 
     {
         public Vector3 GetRandomPoint(Transform minPos, Transform maxPos)
         {
