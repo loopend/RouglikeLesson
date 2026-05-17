@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
+
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -18,14 +20,8 @@ namespace Assets.Scripts.Player.Weapon
         public int CurrentHealth => _currenHealth;
         public int MaxHealth => _maxHealth;
 
-        private void Awake()
-        {
-            _diContainer.Inject(injectable:this);
-        }
-        private void Start()
-        {
-            SetStats(0);
-        }
+        private void Awake() => _diContainer.Inject(injectable: this);
+        private void Start() => SetStats(0);
 
         public virtual void LevelUp()
         {
@@ -45,17 +41,13 @@ namespace Assets.Scripts.Player.Weapon
         }
 
 
-        protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage
+        protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage;
 
-
-
-
-
-        [Inject]
-        private void Construct(DiContainer diContainer)
+       [Inject] private void Construct(DiContainer diContainer)
         {
             _diContainer = diContainer;
         }
+
 
     }
 }
