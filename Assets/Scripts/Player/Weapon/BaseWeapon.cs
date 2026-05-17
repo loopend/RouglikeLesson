@@ -13,21 +13,21 @@ namespace Assets.Scripts.Player.Weapon
         [SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
         [SerializeField] private float _damage;
         private DiContainer _diContainer;
-        private int _currenHealth = 1;
-        private int _maxHealth = 8;
-        public List<WeaponStats> Weapons => _weaponStats;
+        private int _currenLevel = 1;
+        private int _maxLevel = 8;
+        public List<WeaponStats> WeaponStats => _weaponStats;
         public float Damage => _damage;
-        public int CurrentHealth => _currenHealth;
-        public int MaxHealth => _maxHealth;
+        public int CurrentLevel => _currenLevel;
+        public int MaxLevel => _maxLevel;
 
         private void Awake() => _diContainer.Inject(injectable: this);
-        private void Start() => SetStats(0);
+        protected virtual void Start() => SetStats(0);
 
         public virtual void LevelUp()
         {
-            if (_currenHealth < _maxHealth)
-                _currenHealth++;
-            SetStats(_currenHealth - 1);
+            if (_currenLevel < _maxLevel)
+                _currenLevel++;
+            SetStats(_currenLevel - 1);
         }
 
 
