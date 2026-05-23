@@ -10,12 +10,12 @@ namespace Assets.Scripts.Player.Weapon
 {
     public abstract class BaseWeapon : MonoBehaviour
     {
-        [SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
+        [SerializeField] private List<WeaponStats> _weaponStats;
         protected float _damage;
         private DiContainer _diContainer;
         private int _currenLevel = 1;
         private int _maxLevel = 8;
-        public List<WeaponStats> WeaponStats => WeaponStats1;
+        public List<WeaponStats> WeaponStats => _weaponStats;
         public float Damage => _damage;
         public int CurrentLevel => _currenLevel;
         public int MaxLevel => _maxLevel;
@@ -43,7 +43,7 @@ namespace Assets.Scripts.Player.Weapon
         }
 
 
-        protected virtual void SetStats(int value) => _damage = WeaponStats1[value].Damage;
+        protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage;
 
        [Inject] private void Construct(DiContainer diContainer)
         {
