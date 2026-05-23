@@ -63,7 +63,7 @@ namespace Assets.Scripts.Player.Weapon
 
         protected override void SetStats(int value)
         {
-            base.SetStats(value-1);
+            base.SetStats(value);
             _rotationSpeed = WeaponStats[CurrentLevel - 1].Speed;
             _range = WeaponStats[CurrentLevel - 1].Range;
             _duration = new WaitForSeconds(WeaponStats[CurrentLevel - 1].Duration);
