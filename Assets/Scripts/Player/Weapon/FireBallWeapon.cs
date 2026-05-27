@@ -6,11 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Assets.Scripts.Player.Weapon
 {
     public class FireBallWeapon : BaseWeapon, IActivate
     {
+        [Header("UI")]
+        [SerializeField] private TMP_Text _weaponLevelText;
         [Header("Single")]
         [SerializeField] private SpriteRenderer _spriteRenderer1X;
         [SerializeField] private Collider2D _collider1X;
@@ -32,10 +36,10 @@ namespace Assets.Scripts.Player.Weapon
             LevelUp();
             LevelUp();
             LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
+            //LevelUp();
+            //LevelUp();
+            //LevelUp();
+            //LevelUp();
         }
 
 
@@ -59,6 +63,7 @@ namespace Assets.Scripts.Player.Weapon
         {
             base.LevelUp();
             SetupWeapon();
+            UpdateUI(); 
         }
 
         protected override void SetStats(int value)
@@ -68,8 +73,17 @@ namespace Assets.Scripts.Player.Weapon
             _range = WeaponStats[CurrentLevel - 1].Range;
             _duration = new WaitForSeconds(WeaponStats[CurrentLevel - 1].Duration);
             _timeBetweenAttack = new WaitForSeconds(WeaponStats[CurrentLevel - 1].TimeBetweenAttack);
+
+            UpdateUI(); 
         }
 
+        private void UpdateUI()
+        {
+            if (_weaponLevelText != null)
+            {
+                _weaponLevelText.text = $"Уровень оружия: {CurrentLevel}";
+            }
+        }
 
         private void OnConnectedToServer()
         {
