@@ -35,12 +35,12 @@ namespace Assets.Scripts.Player.Weapon
             SetStats(0);
             SetupWeapon();
             LevelUp();
-            //LevelUp();
-            //LevelUp();
-            //LevelUp();
-            //LevelUp();
-            //LevelUp();
-            //LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
         }
 
 
