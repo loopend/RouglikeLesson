@@ -8,13 +8,15 @@ public class PlayerHealth : ObjectHealth
 
     [SerializeField] private float _regenerationValue = 1f;
     [SerializeField] private float _regenerationDelay = 5f;
+    [SerializeField] private float _DOTDelay = 1f;
 
     private WaitForSeconds _regenInterval;
-    private WaitForSeconds _damageOverTimeInterval = new WaitForSeconds(1f);
+    private WaitForSeconds _damageOverTimeInterval;
 
     private void Start()
     {
         _regenInterval = new WaitForSeconds(_regenerationDelay);
+        _damageOverTimeInterval = new WaitForSeconds(_DOTDelay);
         StartCoroutine(Regeneration());
     }
 
@@ -29,7 +31,7 @@ public class PlayerHealth : ObjectHealth
         base.TakeDamage(damage);
         OnHealthChanged?.Invoke();
         if (CurrentHealth <= 0)
-            Debug.Log("Èãðîê óìåð");
+            Debug.Log(" ");
     }
 
 
@@ -45,7 +47,7 @@ public class PlayerHealth : ObjectHealth
         while (elapsed < duration)
         {
             TakeDamage(damageTick);
-            elapsed += 1f;
+            elapsed += _DOTDelay;
             yield return _damageOverTimeInterval;
         }
     }
@@ -61,7 +63,7 @@ public class PlayerHealth : ObjectHealth
             yield return _regenInterval;
         }
     }
-    // Òóò ïðåäûäóùèé êîä. Ñîõðàíèë íà âñÿêèé
+    //   .   
     //public Action OnHealthChanged;
 
     //private WaitForSeconds _regenerationInterval = new WaitForSeconds(5f);
@@ -80,7 +82,7 @@ public class PlayerHealth : ObjectHealth
     //    base.TakeDamage(damage);
     //    OnHealthChanged?.Invoke();
     //    if (CurrentHealth <= 0)
-    //        Debug.Log("Èãðîê óìåð");
+    //        Debug.Log(" ");
     //}
     //public void ApplyDamageOverTime(float damagePerTick, float duratin)
     //{
