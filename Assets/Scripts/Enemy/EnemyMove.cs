@@ -15,7 +15,16 @@ public class EnemyMove : MonoBehaviour
     private WaitForSeconds _checkTime = new WaitForSeconds(3f);
     private Coroutine _distanceToHide;
 
-    private void OnEnable() => _distanceToHide = StartCoroutine(CheckDistanceToHide());
+    private float _movementSpeedMultiplier = 1f;
+
+    private void OnEnable()
+    {
+        _movementSpeedMultiplier = 1f;
+        _distanceToHide = StartCoroutine(CheckDistanceToHide());
+    }
+
+    public void SetMovementSpeedMultiplier(float multiplier) =>
+        _movementSpeedMultiplier = Mathf.Clamp(multiplier, 0f, 1f);
 
     private void OnDisable()
     {
@@ -33,7 +42,7 @@ public class EnemyMove : MonoBehaviour
         if (distance < 0.1f)
             return;
         _direction = (_playerMovement.transform.position - transform.position).normalized;
-        transform.position += _direction * (_moveSpeed * Time.deltaTime);
+        transform.position += _direction * (_moveSpeed * _movementSpeedMultiplier * Time.deltaTime);
         _animator.SetFloat(name:"Horizontal", _direction.x);
         _animator.SetFloat(name:"Vertical", _direction.y);
     }
