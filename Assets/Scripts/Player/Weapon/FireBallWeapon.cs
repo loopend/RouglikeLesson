@@ -31,6 +31,7 @@ namespace Assets.Scripts.Player.Weapon
 
         protected override void Start()
         {
+            CacheColliderReferences();
             SetStats(0);
             SetupWeapon();
             LevelUp();
@@ -95,6 +96,27 @@ namespace Assets.Scripts.Player.Weapon
                 _collider1X.offset = new Vector2(_range, 0);
             }
         }
+        private void CacheColliderReferences()
+        {
+            var colliders = GetComponents<Collider2D>();
+            if (colliders.Length == 0)
+                return;
+
+            if (_collider1X == null)
+                _collider1X = colliders[0];
+
+            if (_collider2X == null || _collider2X.Count == 0)
+                _collider2X = new List<Collider2D>(colliders);
+            else
+            {
+                for (int i = 0; i < _collider2X.Count && i < colliders.Length; i++)
+                {
+                    if (_collider2X[i] == null)
+                        _collider2X[i] = colliders[i];
+                }
+            }
+        }
+
         private void SetupWeapon()
         {
             if (CurrentLevel < 4)
@@ -106,11 +128,20 @@ namespace Assets.Scripts.Player.Weapon
             }
             else
             {
+                if (_collider2X == null || _collider2X.Count < 2
+                    || _transformSprite2X == null || _transformSprite2X.Count < 2
+                    || _collider2X[0] == null || _collider2X[1] == null)
+                {
+                    Debug.LogWarning("FireBallWeapon: для уровня 4+ нужны 2 коллайдера и 2 Transform в инспекторе.");
+                    return;
+                }
+
                 _targetContainer1X.gameObject.SetActive(false);
                 _targetContainer2X.gameObject.SetActive(true);
                 for (int i = 0; i < _collider2X.Count; i++)
                 {
-                    _collider2X[i].gameObject.SetActive(true);
+                    if (_collider2X[i] != null)
+                        _collider2X[i].enabled = true;
                 }
                 _transformSprite2X[0].localPosition = new Vector3(_range, 0, 0);
                 _transformSprite2X[1].localPosition = new Vector3(-_range, 0, 0);

@@ -124,6 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 0
+  _damageSound: {fileID: 8300000, guid: 70e7c4a6462cd5f4194d22ebe52e50a7, type: 3}
+  _damageSoundVolume: 0.35
 --- !u!1 &2375807393532498416
 GameObject:
   m_ObjectHideFlags: 0

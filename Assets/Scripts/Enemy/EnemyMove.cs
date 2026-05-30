@@ -15,9 +15,15 @@ public class EnemyMove : MonoBehaviour
     private WaitForSeconds _checkTime = new WaitForSeconds(3f);
     private Coroutine _distanceToHide;
 
-    private void OnEnable() => _distanceToHide = StartCoroutine(routine: CheckDistanceToHide());
+    private void OnEnable() => _distanceToHide = StartCoroutine(CheckDistanceToHide());
 
-    private void OnDisable() => StopCoroutine(_distanceToHide);
+    private void OnDisable()
+    {
+        if (_distanceToHide == null)
+            return;
+        StopCoroutine(_distanceToHide);
+        _distanceToHide = null;
+    }
 
     private void Update() => Move();
 
