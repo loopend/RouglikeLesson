@@ -13,10 +13,17 @@ public class EnemyMove : MonoBehaviour
     private Vector3 _direction;
     private PlayerMovement _playerMovement;
     private WaitForSeconds _checkTime = new WaitForSeconds(3f);
+    private WaitForSeconds _freeze = new WaitForSeconds(3f);
     private Coroutine _distanceToHide;
+    private float _initialSpeed;
 
     private float _movementSpeedMultiplier = 1f;
 
+    private void Start()
+    {
+        _initialSpeed = _moveSpeed;
+        _freeze = new WaitForSeconds(_freezeTimer);
+    }
     private void OnEnable()
     {
         _movementSpeedMultiplier = 1f;
@@ -35,6 +42,14 @@ public class EnemyMove : MonoBehaviour
     }
 
     private void Update() => Move();
+
+    public void FreezeEnemy()
+    {
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(routine:StartFreeze()); 
+        }
+;    }
 
     private void Move()
     {
@@ -59,7 +74,12 @@ public class EnemyMove : MonoBehaviour
 
     }
 
-
+    private IEnumerator StartFreeze()
+    {
+        _moveSpeed /= 2f;
+        yield return _freeze;
+        _moveSpeed = _initialSpeed;
+    }
 
     [Inject] private void Construct(PlayerMovement playerMovement) => _playerMovement = playerMovement;
 }

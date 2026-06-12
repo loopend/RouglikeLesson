@@ -38,10 +38,6 @@ namespace Assets.Scripts.Player.Weapon
         private float _rotationSpeed, _range;
         private Coroutine _attackCoroutine;
 
-
-
-
-
         protected override void Start()
         {
             CacheColliderReferences();

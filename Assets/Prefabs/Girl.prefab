@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 2
-  _freezeTimer: 0
+  _freezeTimer: 3
   _animator: {fileID: 4276495839556422694}
 --- !u!114 &4152520998929964857
 MonoBehaviour:
@@ -70,9 +70,6 @@ MonoBehaviour:
   _currentHealth: 0
   _damageSound: {fileID: 8300000, guid: 70e7c4a6462cd5f4194d22ebe52e50a7, type: 3}
   _damageSoundVolume: 0.35
-  spriteRenderer: {fileID: 5242409977384526813}
-  flashDuration: 0.1
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &7439873011139176197
 MonoBehaviour:
   m_ObjectHideFlags: 0
