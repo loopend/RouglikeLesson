@@ -18,6 +18,7 @@ public class EnemyMove : MonoBehaviour
     private float _initialSpeed;
 
     private float _movementSpeedMultiplier = 1f;
+    private bool _isStopped;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class EnemyMove : MonoBehaviour
     private void OnEnable()
     {
         _movementSpeedMultiplier = 1f;
+        _isStopped = false;
         _distanceToHide = StartCoroutine(CheckDistanceToHide());
     }
 
@@ -51,8 +53,19 @@ public class EnemyMove : MonoBehaviour
         }
 ;    }
 
+    public void StopEnemy(float duration)
+    {
+        if (!gameObject.activeSelf || _isStopped)
+            return;
+
+        StartCoroutine(StartStop(duration));
+    }
+
     private void Move()
     {
+        if (_isStopped)
+            return;
+
         float distance = Vector3.Distance(transform.position, _playerMovement.transform.position);
         if (distance < 0.1f)
             return;
@@ -79,6 +92,13 @@ public class EnemyMove : MonoBehaviour
         _moveSpeed /= 2f;
         yield return _freeze;
         _moveSpeed = _initialSpeed;
+    }
+
+    private IEnumerator StartStop(float duration)
+    {
+        _isStopped = true;
+        yield return new WaitForSeconds(duration);
+        _isStopped = false;
     }
 
     [Inject] private void Construct(PlayerMovement playerMovement) => _playerMovement = playerMovement;

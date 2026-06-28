@@ -11,6 +11,10 @@ namespace Assets.Scripts.Player.Weapon.FrostBolt
 {
     public class FrostBolt : Projectile
     {
+        private const float StopDuration = 2f;
+        private const float StopChance = 0.5f;
+        private const int StopMinLevel = 5;
+
         private FrostBoltWeapon _frostBoltWeapon;
 
         protected override void OnEnable()
@@ -29,7 +33,13 @@ namespace Assets.Scripts.Player.Weapon.FrostBolt
             if (other.gameObject.TryGetComponent(out EnemyHealth enemy))
             {
                 enemy.TakeDamage(Damage);
-                enemy.GetComponent<EnemyMove>().FreezeEnemy();  
+
+                if (_frostBoltWeapon.CurrentLevel >= StopMinLevel &&
+                    Random.value < StopChance &&
+                    other.gameObject.TryGetComponent(out EnemyMove enemyMove))
+                {
+                    enemyMove.StopEnemy(StopDuration);
+                }
             }
             if (_frostBoltWeapon.CurrentLevel <= 4)
             {

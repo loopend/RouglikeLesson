@@ -27,6 +27,14 @@ namespace Assets.Scripts.Player.Weapon.FrostBolt
         private void OnEnable()
         {
             Activate();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            
         }
         public void Activate()
         {
@@ -43,10 +51,10 @@ namespace Assets.Scripts.Player.Weapon.FrostBolt
         }
         protected override void SetStats(int value)
         {
-            base.SetStats(CurrentLevel -1);
-            _timeBetweenAttack = new WaitForSeconds(WeaponStats[CurrentLevel -1].TimeBetweenAttack);
-            _speed = WeaponStats[CurrentLevel - 1]. Speed;
-            _duration = WeaponStats[CurrentLevel - 1].Duration;
+            base.SetStats(value);
+            _timeBetweenAttack = new WaitForSeconds(WeaponStats[value].TimeBetweenAttack);
+            _speed = WeaponStats[value].Speed;
+            _duration = WeaponStats[value].Duration;
         }
 
         private IEnumerator StartThrowFrozenBolt()
