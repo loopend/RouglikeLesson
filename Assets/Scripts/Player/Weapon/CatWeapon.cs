@@ -1,7 +1,7 @@
 using Assets.Scripts.GameCore;
-using System.Collections;
 using UnityEngine;
 using TMPro;
+using Zenject;
 
 namespace Assets.Scripts.Player.Weapon
 {
@@ -15,12 +15,16 @@ namespace Assets.Scripts.Player.Weapon
         [SerializeField] private Transform _catSprite;
         [SerializeField] private Animator _animator;
 
-        private WaitForSeconds _interval;
-        private WaitForSeconds _duration;
-        private WaitForSeconds _timeBetweenAttack;
-        private float _rotationSpeed;
+        private Transform _playerTransform;
+        private float _orbitAngle;
+        private float _orbitSpeed;
         private float _range;
-        private Coroutine _attackCoroutine;
+
+        [Inject]
+        private void Construct(PlayerMovement playerMovement)
+        {
+            _playerTransform = playerMovement.transform;
+        }
 
         protected override void Start()
         {
@@ -28,7 +32,6 @@ namespace Assets.Scripts.Player.Weapon
                 _collider = GetComponent<Collider2D>();
 
             SetStats(0);
-            SetupWeapon();
             Activate();
             LevelUp();
             LevelUp();
@@ -39,58 +42,66 @@ namespace Assets.Scripts.Player.Weapon
             LevelUp();
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (_spriteRenderer == null || !_spriteRenderer.enabled)
-                return;
+            if (_playerTransform != null)
+                transform.position = _playerTransform.position;
 
-            transform.Rotate(0f, 0f, _rotationSpeed * Time.deltaTime);
-            UpdateAnimatorDirection();
+            transform.rotation = Quaternion.identity;
+
+            _orbitAngle += _orbitSpeed * Time.deltaTime;
+            float angleRad = _orbitAngle * Mathf.Deg2Rad;
+            Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * _range;
+
+            if (_catSprite != null)
+            {
+                _catSprite.localPosition = new Vector3(offset.x, offset.y, 0f);
+                _catSprite.localRotation = Quaternion.identity;
+            }
+
+            if (_collider != null)
+                _collider.offset = offset;
+
+            UpdateAnimatorDirection(angleRad);
         }
 
         public void Activate()
         {
-            _attackCoroutine = StartCoroutine(WeaponLifeCycle());
+            if (_spriteRenderer != null)
+                _spriteRenderer.enabled = true;
+
+            if (_collider != null)
+                _collider.enabled = true;
         }
 
         public void Deactivate()
         {
-            if (_attackCoroutine != null)
-                StopCoroutine(_attackCoroutine);
+            if (_spriteRenderer != null)
+                _spriteRenderer.enabled = false;
+
+            if (_collider != null)
+                _collider.enabled = false;
         }
 
         public override void LevelUp()
         {
             base.LevelUp();
-            SetupWeapon();
             UpdateUI();
         }
 
         protected override void SetStats(int value)
         {
             base.SetStats(value);
-            _rotationSpeed = WeaponStats[CurrentLevel - 1].Speed;
+            _orbitSpeed = WeaponStats[CurrentLevel - 1].Speed;
             _range = WeaponStats[CurrentLevel - 1].Range;
-            _duration = new WaitForSeconds(WeaponStats[CurrentLevel - 1].Duration);
-            _timeBetweenAttack = new WaitForSeconds(WeaponStats[CurrentLevel - 1].TimeBetweenAttack);
             UpdateUI();
         }
 
-        private void SetupWeapon()
-        {
-            if (_catSprite != null)
-                _catSprite.localPosition = new Vector3(_range, 0f, 0f);
-
-            if (_collider != null)
-                _collider.offset = new Vector2(_range, 0f);
-        }
-
-        private void UpdateAnimatorDirection()
+        private void UpdateAnimatorDirection(float angleRad)
         {
             if (_animator == null)
                 return;
 
-            float angleRad = transform.eulerAngles.z * Mathf.Deg2Rad;
             Vector2 direction = new Vector2(-Mathf.Sin(angleRad), Mathf.Cos(angleRad));
             _animator.SetFloat("Horizontal", direction.x);
             _animator.SetFloat("Vertical", direction.y);
@@ -100,21 +111,6 @@ namespace Assets.Scripts.Player.Weapon
         {
             if (_weaponLevelText != null)
                 _weaponLevelText.text = $"Уровень оружия: {CurrentLevel}";
-        }
-
-        private IEnumerator WeaponLifeCycle()
-        {
-            if (_spriteRenderer == null || _collider == null)
-                yield break;
-
-            while (true)
-            {
-                bool enable = !_spriteRenderer.enabled;
-                _spriteRenderer.enabled = enable;
-                _collider.enabled = enable;
-                _interval = enable ? _duration : _timeBetweenAttack;
-                yield return _interval;
-            }
         }
     }
 }
