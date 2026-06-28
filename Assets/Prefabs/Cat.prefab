@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6225455993168487970}
   - component: {fileID: 3222528457104261995}
   - component: {fileID: 2326478043727838761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CatSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,9 +27,9 @@ Transform:
   m_GameObject: {fileID: 4440435435461625821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.47, y: 0, z: 0}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 1.26, y: 0, z: 0}
+  m_LocalScale: {x: 2.39, y: 2.39, z: 2.39}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 403973374165930880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1054009206, guid: 1fe1bbbef1f136246adf6646064e12af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,8 +115,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 403973374165930880}
+  - component: {fileID: 8392746510983764521}
   - component: {fileID: 7377619786895747258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,13 +133,48 @@ Transform:
   m_GameObject: {fileID: 4577767851111110449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6225455993168487970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8392746510983764521
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4577767851111110449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.2557023, y: 0.02894485}
+  serializedVersion: 2
+  m_Radius: 0.30522043
 --- !u!114 &7377619786895747258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,9 +184,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 4577767851111110449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c1aff0340a89c4ca59484ce903adcf, type: 3}
+  m_Script: {fileID: 11500000, guid: e8f2a1b3c4d5678901234abcd5678901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1.7
-  _freezeTimer: 0
+  _weaponStats:
+  - _speed: 200
+    _damage: 5
+    _range: 2
+    _timeBetweenAttack: 2
+    _duration: 1.5
+  - _speed: 220
+    _damage: 6
+    _range: 2.2
+    _timeBetweenAttack: 1.9
+    _duration: 1.6
+  - _speed: 240
+    _damage: 8
+    _range: 2.3
+    _timeBetweenAttack: 1.8
+    _duration: 1.7
+  - _speed: 240
+    _damage: 8
+    _range: 2.4
+    _timeBetweenAttack: 1.8
+    _duration: 1.8
+  - _speed: 250
+    _damage: 11
+    _range: 2.5
+    _timeBetweenAttack: 1.7
+    _duration: 1.7
+  - _speed: 280
+    _damage: 13
+    _range: 2.7
+    _timeBetweenAttack: 1.6
+    _duration: 1.9
+  - _speed: 290
+    _damage: 16
+    _range: 2.8
+    _timeBetweenAttack: 1.5
+    _duration: 2
+  - _speed: 300
+    _damage: 20
+    _range: 3
+    _timeBetweenAttack: 1.3
+    _duration: 2.5
+  _weaponLevelText: {fileID: 0}
+  _spriteRenderer: {fileID: 3222528457104261995}
+  _collider: {fileID: 8392746510983764521}
+  _catSprite: {fileID: 6225455993168487970}
   _animator: {fileID: 2326478043727838761}
