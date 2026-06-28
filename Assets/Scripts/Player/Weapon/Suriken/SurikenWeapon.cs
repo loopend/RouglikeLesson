@@ -22,13 +22,20 @@ namespace Assets.Scripts.Player.Weapon.Suriken
         private Coroutine _surikenCoroutine;
         protected float _duration, _speed, _range;
         private Vector3 _direction;
-        public float Duration => _duration; // у меня не работал с приватом и протектом в скрипте Suriken. поставил паблик/ пока не пойму как решить
-        public float Speed => _speed;// у меня не работал с приватом и протектом в скрипте Suriken. поставил паблик/ пока не пойму как решить
+        public float Duration => _duration; 
+        public float Speed => _speed;
         public Vector3 Direction => _direction;
 
         private void OnEnable()
         {
             Activate();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
         }
 
         public void Activate()
@@ -59,11 +66,11 @@ namespace Assets.Scripts.Player.Weapon.Suriken
                 {
                     Vector3 targetPosition = enemiesInRange[Random.Range(0, enemiesInRange.Length)].transform.position;
                     _direction = (targetPosition - transform.position).normalized;
-                    float angle = Mathf.Atan2(_direction.y,_direction.x) * Mathf.Rad2Deg;
+                    float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
                     GameObject suriken = _objectPool.GetFromPool();
                     suriken.transform.SetParent(_container);
-                    suriken.transform.position = targetPosition;
-                    suriken.transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward); 
+                    suriken.transform.position = transform.position;
+                    suriken.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); 
                     yield return _timeBetweenAttack;
                 }
                 else
