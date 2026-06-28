@@ -1559,7 +1559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &511299724
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,7 +1992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &579888676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2020,6 +2020,26 @@ MonoBehaviour:
     _damage: 5
     _range: 0
     _timeBetweenAttack: 2.5
+    _duration: 0
+  - _speed: 0
+    _damage: 7
+    _range: 0
+    _timeBetweenAttack: 2.2
+    _duration: 0
+  - _speed: 0
+    _damage: 7
+    _range: 0
+    _timeBetweenAttack: 2.2
+    _duration: 0
+  - _speed: 0
+    _damage: 7
+    _range: 0
+    _timeBetweenAttack: 2.2
+    _duration: 0
+  - _speed: 0
+    _damage: 7
+    _range: 0
+    _timeBetweenAttack: 2.2
     _duration: 0
   - _speed: 0
     _damage: 7
@@ -2526,7 +2546,7 @@ MonoBehaviour:
   _weaponTransform: {fileID: 1232841058}
   _objectPool: {fileID: 718118701}
   _animator: {fileID: 718118700}
-  _aimJoystick: {fileID: 0}
+  _aimJoystick: {fileID: 398588812}
   _minChargeTime: 0.2
   _maxChargeTime: 2
   _minChargeMultiplier: 0.5

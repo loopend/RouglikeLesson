@@ -12,6 +12,10 @@ namespace Assets.Scripts.Player.Weapon.Trap
 {
     public class Trap : Projectile
     {
+        private const float StopDuration = 2f;
+        private const int SlowMinLevel = 5;
+        private const int StunMinLevel = 7;
+
         [SerializeField] private CircleCollider2D _collider;
         private WaitForSeconds _checkInterval = new WaitForSeconds(3f);
         private PlayerHealth _playerHealth;
@@ -35,9 +39,22 @@ namespace Assets.Scripts.Player.Weapon.Trap
                 {
                     enemy.Burn(Damage);
                 }
-                gameObject.SetActive(false);
 
+                if (other.gameObject.TryGetComponent(out EnemyMove enemyMove))
+                    ApplyTrapEffect(enemyMove);
+
+                gameObject.SetActive(false);
             }
+        }
+
+        private void ApplyTrapEffect(EnemyMove enemyMove)
+        {
+            int level = _trapWeapon.CurrentLevel;
+
+            if (level >= StunMinLevel)
+                enemyMove.StopEnemy(StopDuration);
+            else if (level >= SlowMinLevel)
+                enemyMove.FreezeEnemy();
         }
 
         public void ActivateTrap() => _collider.enabled = true;
