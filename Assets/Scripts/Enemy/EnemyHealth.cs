@@ -1,5 +1,10 @@
+using Assets.Scripts.GameCore.UI;
 using System.Collections;
+
+
 using UnityEngine;
+
+using Zenject;
 
 public class EnemyHealth : ObjectHealth
 {
@@ -7,10 +12,12 @@ public class EnemyHealth : ObjectHealth
     [SerializeField] [Range(0f, 1f)] private float _damageSoundVolume = 0.35f;
 
     private WaitForSeconds _tick = new WaitForSeconds(1f);
+    private DamageTextSpawner _damageTextSpawner;
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        _damageTextSpawner.Activate(transform, (int)damage);
         PlayDamageSound();
         if (CurrentHealth <= 0)
             gameObject.SetActive(false);
@@ -38,5 +45,5 @@ public class EnemyHealth : ObjectHealth
             //}
         }
     }
-  
+    [Inject] private void Construct(DamageTextSpawner damageTextSpawner) => _damageTextSpawner = damageTextSpawner;
 }

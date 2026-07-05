@@ -662,7 +662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &269262487
 Transform:
   m_ObjectHideFlags: 0
@@ -2434,6 +2434,8 @@ GameObject:
   m_Component:
   - component: {fileID: 662817779}
   - component: {fileID: 662817780}
+  - component: {fileID: 662817782}
+  - component: {fileID: 662817781}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -2469,6 +2471,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthImage: {fileID: 1468199243}
+--- !u!114 &662817781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662817778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0aa3a7172c4704babe02b82b847f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1075755236961123313, guid: efc323d468c66284d95352329dafe87e, type: 3}
+--- !u!114 &662817782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662817778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c11a69496e2544970a44e906510e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textPool: {fileID: 662817781}
 --- !u!1 &710257603
 GameObject:
   m_ObjectHideFlags: 0
@@ -85274,7 +85302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -587.99994, y: -293.00003}
+  m_AnchoredPosition: {x: -588, y: -293}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005154606
@@ -85843,7 +85871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1232841058
 Transform:
   m_ObjectHideFlags: 0
@@ -87670,6 +87698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc6fbe67e04aa44ead5330160ca1acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageTextSpawner: {fileID: 662817782}
 --- !u!1 &2128625864
 GameObject:
   m_ObjectHideFlags: 0
