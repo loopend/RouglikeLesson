@@ -20,14 +20,9 @@ namespace Assets.Scripts.Enemy
         private GetRandomSpawnPoint _getRandomSpawn;
         private Coroutine _spawnCoroutine;
 
-
-        private void Awake()
-        {
-            Activate();
-        }
-
         private void Start()
         {
+
             _interval = new WaitForSeconds(_timeToSpawn);
         }
         public void Activate()
