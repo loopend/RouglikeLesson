@@ -25,7 +25,7 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         {
             if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
-                _experienceSystem.OnExpiriencePickUp?.Invoke(_value);
+                _experienceSystem.PickUpExperience(_value);
                 gameObject.SetActive(false);    
             }
         }

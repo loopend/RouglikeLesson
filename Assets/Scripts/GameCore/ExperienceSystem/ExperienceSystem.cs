@@ -18,27 +18,20 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         public float ExpirienceToUp => _experienceToUp;
         public int CurrentLevel => _currentLevel;
 
-
-        private void OnEnable()
-        {
-            OnExpiriencePickUp += ExperienceAddValue;
-        }
-        private void OnDisable()
-        {
-            OnExpiriencePickUp -= ExperienceAddValue;
-        }
-
-        private void ExperienceAddValue(float value)
+        public void PickUpExperience(float value)
         {
             if (value <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
+
             _currentExperience += value;
             if (_currentExperience >= _experienceToUp)
             {
                 LevelUp();
             }
+
+            OnExpiriencePickUp?.Invoke(value);
         }
         private void LevelUp()
         {

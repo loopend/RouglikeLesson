@@ -18,18 +18,19 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         private ExperienceSystem _experienceSystem;
 
 
-        private void OnEnable()
-        {
-            _experienceSystem.OnExpiriencePickUp += UpdateExperienceBar;
-        }
-        private void OnDisable()
-        {
-            _experienceSystem.OnExpiriencePickUp -= UpdateExperienceBar;
-        }
         private void Start()
         {
+            _experienceSystem.OnExpiriencePickUp += UpdateExperienceBar;
             _expBar.fillAmount = 0f;
             _expText.text = "1 LVL";
+        }
+
+        private void OnDestroy()
+        {
+            if (_experienceSystem != null)
+            {
+                _experienceSystem.OnExpiriencePickUp -= UpdateExperienceBar;
+            }
         }
 
         private void UpdateExperienceBar(float experience)
@@ -40,7 +41,7 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         }
 
         [Inject]
-        private void Consruct(ExperienceSystem experienceSystem)
+        private void Construct(ExperienceSystem experienceSystem)
         {
             _experienceSystem = experienceSystem;
         }
