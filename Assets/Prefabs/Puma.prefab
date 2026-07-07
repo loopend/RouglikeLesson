@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e3aec87badbdb4e86d7a483c6dc22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
-  _currentHealth: 50
+  _maxHealth: 25
+  _currentHealth: 25
   _damageSound: {fileID: 8300000, guid: 70e7c4a6462cd5f4194d22ebe52e50a7, type: 3}
   _damageSoundVolume: 0.35
 --- !u!114 &2325523585041322429

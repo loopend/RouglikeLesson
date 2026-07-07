@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &28593678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &269262487
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &272940013
 Transform:
   m_ObjectHideFlags: 0
@@ -85373,7 +85373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &968113827
 Transform:
   m_ObjectHideFlags: 0
@@ -86393,7 +86393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1232841058
 Transform:
   m_ObjectHideFlags: 0
@@ -87643,7 +87643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeWindow: {fileID: 0}
   _levelUpSound: {fileID: 8300000, guid: f58577c53b860ef428f3cb0de3b67dd3, type: 3}
-  _levelUpSoundVolume: 1
+  _levelUpSoundVolume: 0.716
   _baseExperienceToUp: 5
   _earlyGameIncrement: 10
   _midGameIncrement: 13
