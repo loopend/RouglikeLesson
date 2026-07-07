@@ -87581,6 +87581,8 @@ GameObject:
   - component: {fileID: 1745883177}
   - component: {fileID: 1745883176}
   - component: {fileID: 1745883175}
+  - component: {fileID: 1745883178}
+  - component: {fileID: 1745883179}
   m_Layer: 0
   m_Name: ExpSystem
   m_TagString: Untagged
@@ -87648,6 +87650,36 @@ MonoBehaviour:
   _earlyGameIncrement: 10
   _midGameIncrement: 13
   _lateGameIncrement: 16
+--- !u!114 &1745883178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745883173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6789012345678abcdef03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossLevelInterval: 10
+  _minPos: {fileID: 968441323}
+  _maxPos: {fileID: 1988637610}
+  _enemyContainer: {fileID: 824219729}
+  _bossPool: {fileID: 1745883179}
+--- !u!114 &1745883179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745883173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0aa3a7172c4704babe02b82b847f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8338628886906273977, guid: 9d2123647e2459948b98bdfb4c62ccf1, type: 3}
 --- !u!1 &1830985988
 GameObject:
   m_ObjectHideFlags: 0
@@ -88605,6 +88637,7 @@ MonoBehaviour:
   _playerUpgrade: {fileID: 611812553}
   _levelSystem: {fileID: 1913484192}
   _gameTimer: {fileID: 1913484193}
+  _bossSpawner: {fileID: 1745883178}
 --- !u!1 &2128625864
 GameObject:
   m_ObjectHideFlags: 0

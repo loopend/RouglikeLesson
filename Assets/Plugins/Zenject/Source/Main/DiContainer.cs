@@ -12,11 +12,6 @@ using UnityEngine;
 namespace Zenject
 {
     public delegate bool BindingCondition(InjectContext c);
-
-    // Responsibilities:
-    // - Expose methods to configure object graph via BindX() methods
-    // - Look up bound values via Resolve() method
-    // - Instantiate new values via InstantiateX() methods
     [NoReflectionBaking]
     public class DiContainer : IInstantiator
     {
@@ -90,8 +85,7 @@ namespace Zenject
                 _inheritedDefaultParent = parentContainers.First().DefaultParent;
 #endif
 
-                // Make sure to avoid duplicates which could happen if a parent container
-                // appears multiple times in the inheritance chain
+
                 foreach (var ancestorContainer in ancestorContainers.Distinct())
                 {
                     foreach (var binding in ancestorContainer._childBindings)
@@ -107,7 +101,6 @@ namespace Zenject
                 Assert.That(_childBindings.Count == 0);
             }
 
-            // Assumed to be configured in a parent container
             var settings = TryResolve<ZenjectSettings>();
 
             if (settings != null)
@@ -141,10 +134,7 @@ namespace Zenject
         {
         }
 
-        // By default the settings will be inherited from parent containers, but can be
-        // set explicitly here as well which is useful in particular in unit tests
-        // Note however that if you want child containers to use this same value you have
-        // to bind it as well
+
         public ZenjectSettings Settings
         {
             get { return _settings; }
@@ -162,7 +152,6 @@ namespace Zenject
 
         public IEnumerable<IProvider> AllProviders
         {
-            // Distinct is necessary since the same providers can be used with multiple contracts
             get { return _providers.Values.SelectMany(x => x).Select(x => x.Provider).Distinct(); }
         }
 
@@ -174,7 +163,6 @@ namespace Zenject
 
         object CreateLazyBinding(InjectContext context)
         {
-            // By cloning it this also means that Ids, optional, etc. are forwarded properly
             var newContext = context.Clone();
             newContext.MemberType = context.MemberType.GenericArguments().Single();
 
@@ -192,7 +180,6 @@ namespace Zenject
 
         public void QueueForValidate(IValidatable validatable)
         {
-            // Don't bother adding to queue if the initial resolve is already completed
             if (!_hasResolvedRoots)
             {
                 var concreteType = validatable.GetType();
@@ -224,7 +211,6 @@ namespace Zenject
         }
 
 #if !NOT_UNITY3D
-        // This might be null in some rare cases like when used in ZenjectUnitTestFixture
         Transform ContextTransform
         {
             get
@@ -246,9 +232,6 @@ namespace Zenject
         }
 #endif
 
-        // When true, this will throw exceptions whenever we create new game objects
-        // This is helpful when used in places like EditorWindowKernel where we can't
-        // assume that there is a "scene" to place objects
         public bool AssertOnNewGameObjects
         {
             get;
@@ -268,7 +251,6 @@ namespace Zenject
             set
             {
                 _explicitDefaultParent = value;
-                // Need to use a flag because null is a valid explicit default parent
                 _hasExplicitDefaultParent = true;
             }
         }
@@ -302,13 +284,6 @@ namespace Zenject
         {
             get { return _isValidating; }
         }
-
-        // When this is true, it will log warnings when Resolve or Instantiate
-        // methods are called
-        // Used to ensure that Resolve and Instantiate methods are not called
-        // during bind phase.  This is important since Resolve and Instantiate
-        // make use of the bindings, so if the bindings are not complete then
-        // unexpected behaviour can occur
         public bool IsInstalling
         {
             get { return _isInstalling; }
@@ -360,9 +335,6 @@ namespace Zenject
                 {
                     if (provider.NonLazy)
                     {
-                        // Save them to a list instead of resolving for them here to account
-                        // for the rare case where one of the resolves does another binding
-                        // and therefore changes _providers, causing an exception.
                         rootBindings.Add(bindingPair.Key);
                         rootProviders.Add(provider);
                     }
@@ -385,9 +357,6 @@ namespace Zenject
                         context.Identifier = bindId.Identifier;
                         context.SourceType = InjectSources.Local;
 
-                        // Should this be true?  Are there cases where you are ok that NonLazy matches
-                        // zero providers?
-                        // Probably better to be false to catch mistakes
                         context.Optional = false;
 
                         instances.Clear();
@@ -399,8 +368,6 @@ namespace Zenject
                             SafeGetInstances(providerInfo, context, instances);
                         }
 
-                        // Zero matches might actually be valid in some cases
-                        //Assert.That(matches.Any());
                     }
                 }
             }
@@ -438,8 +405,6 @@ namespace Zenject
 
             var validatables = new List<IValidatable>();
 
-            // Repeatedly flush the validation queue until it's empty, to account for
-            // cases where calls to Validate() add more objects to the queue
             while (_validationQueue.Any())
             {
                 validatables.Clear();
@@ -463,13 +428,6 @@ namespace Zenject
             _lazyInjector.AddInstance(instance);
         }
 
-        // Note: this only does anything useful during the injection phase
-        // It will inject on the given instance if it hasn't already been injected, but only
-        // if the given instance has been queued for inject already by calling QueueForInject
-        // In some rare cases this can be useful - for example if you want to add a binding in a
-        // a higher level container to a resolve inside a lower level game object context container
-        // since in this case you need the game object context to be injected so you can access its
-        // Container property
         public T LazyInject<T>(T instance)
         {
             _lazyInjector.LazyInject(instance);
@@ -557,8 +515,6 @@ namespace Zenject
 
                     if (curDistance > selectedDistance)
                     {
-                        // If matching provider was already found lower in the hierarchy => don't search for a new one,
-                        // because there can't be a better or equal provider in this container.
                         continue;
                     }
 
@@ -573,25 +529,19 @@ namespace Zenject
 
                         if (curHasCondition && !provider.Condition(context))
                         {
-                            // The condition is not satisfied.
                             continue;
                         }
 
-                        // The distance can't decrease becuase we are iterating over the containers with increasing distance.
-                        // The distance can't increase because  we skip the container if the distance is greater than selected.
-                        // So the distances are equal and only the condition can help resolving the amiguity.
                         Assert.That(selected == null || selectedDistance == curDistance);
 
                         if (curHasCondition)
                         {
                             if (selectedHasCondition)
                             {
-                                // Both providers have condition and are on equal depth.
                                 ambiguousSelection = true;
                             }
                             else
                             {
-                                // Ambiguity is resolved because a provider with condition was found.
                                 ambiguousSelection = false;
                             }
                         }
@@ -599,12 +549,10 @@ namespace Zenject
                         {
                             if (selectedHasCondition)
                             {
-                                // Selected provider is better because it has condition.
                                 continue;
                             }
                             if (selected != null)
                             {
-                                // Both providers don't have a condition and are on equal depth.
                                 ambiguousSelection = true;
                             }
                         }
@@ -638,9 +586,6 @@ namespace Zenject
                 ZenPools.DespawnList(localProviders);
             }
         }
-
-        // Get the full list of ancestor Di Containers, making sure to avoid
-        // duplicates and also order them in a breadth-first way
         List<DiContainer> FlattenInheritanceChain()
         {
             var processed = new List<DiContainer>();
@@ -674,15 +619,11 @@ namespace Zenject
                 buffer.AllocFreeAddRange(localProviders);
                 return;
             }
-
-            // If we are asking for a List<int>, we should also match for any localProviders that are bound to the open generic type List<>
-            // Currently it only matches one and not the other - not totally sure if this is better than returning both
             if (bindingId.Type.IsGenericType() && _providers.TryGetValue(new BindingId(bindingId.Type.GetGenericTypeDefinition(), bindingId.Identifier), out localProviders))
             {
                 buffer.AllocFreeAddRange(localProviders);
             }
 
-            // None found
         }
 
         void GetProvidersForContract(
@@ -706,9 +647,6 @@ namespace Zenject
         {
             Instantiate<TInstaller>().InstallBindings();
         }
-
-        // Note: You might want to use Installer<> as your base class instead to allow
-        // for strongly typed parameters
         public void Install<TInstaller>(object[] extraArgs)
             where TInstaller : Installer
         {
@@ -737,7 +675,6 @@ namespace Zenject
 #endif
             {
                 Assert.IsNotNull(context);
-                // Note that different types can map to the same provider (eg. a base type to a concrete class and a concrete class to itself)
 
                 FlushBindings();
                 CheckForInstallWarning(context);
@@ -833,14 +770,12 @@ namespace Zenject
 
             if (context == null)
             {
-                // No way to tell whether this is ok or not so just assume ok
                 return;
             }
 
 #if UNITY_EDITOR
             if (context.MemberType.DerivesFrom<Context>())
             {
-                // This happens when getting default transform parent so ok
                 return;
             }
 #endif
@@ -848,33 +783,25 @@ namespace Zenject
             {
                 return;
             }
-
             var rootContext = context.ParentContextsAndSelf.Last();
-
             if (rootContext.MemberType.DerivesFrom<IInstaller>())
             {
-                // Resolving/instantiating/injecting installers is valid during install phase
                 return;
             }
 
             _hasDisplayedInstallWarning = true;
 
-            // Feel free to comment this out if you are comfortable with this practice
+
             Log.Warn("Zenject Warning: It is bad practice to call Inject/Resolve/Instantiate before all the Installers have completed!  This is important to ensure that all bindings have properly been installed in case they are needed when injecting/instantiating/resolving.  Detected when operating on type '{0}'.  If you don't care about this, you can disable this warning by setting flag 'ZenjectSettings.DisplayWarningWhenResolvingDuringInstall' to false (see docs for details on ZenjectSettings).", rootContext.MemberType);
 #endif
         }
 
-        // Returns the concrete type that would be returned with Resolve<T>
-        // without actually instantiating it
-        // This is safe to use within installers
+
         public Type ResolveType<T>()
         {
             return ResolveType(typeof(T));
         }
 
-        // Returns the concrete type that would be returned with Resolve(type)
-        // without actually instantiating it
-        // This is safe to use within installers
         public Type ResolveType(Type type)
         {
             using (var context = ZenPools.SpawnInjectContext(this, type))
@@ -883,9 +810,7 @@ namespace Zenject
             }
         }
 
-        // Returns the concrete type that would be returned with Resolve(context)
-        // without actually instantiating it
-        // This is safe to use within installers
+
         public Type ResolveType(InjectContext context)
         {
             Assert.IsNotNull(context);
@@ -919,7 +844,7 @@ namespace Zenject
             }
         }
 
-        // Returns all the types that would be returned if ResolveAll was called with the given values
+
         public List<Type> ResolveTypeAll(InjectContext context)
         {
             Assert.IsNotNull(context);
@@ -962,8 +887,7 @@ namespace Zenject
             using (ProfileTimers.CreateTimedBlock("DiContainer.Resolve"))
 #endif
             {
-                // Note: context.Container is not necessarily equal to this, since
-                // you can have some lookups recurse to parent containers
+
                 Assert.IsNotNull(context);
 
                 var memberType = context.MemberType;
@@ -973,11 +897,7 @@ namespace Zenject
 
                 var lookupContext = context;
 
-                // The context used for lookups is always the same as the given context EXCEPT for LazyInject<>
-                // In CreateLazyBinding above, we forward the context to a new instance of LazyInject<>
-                // The problem is, we want the binding for Bind(typeof(LazyInject<>)) to always match even
-                // for members that are marked for a specific ID, so we need to discard the identifier
-                // for this one particular case
+
                 if (memberType.IsGenericType() && memberType.GetGenericTypeDefinition() == typeof(LazyInject<>))
                 {
                     lookupContext = context.Clone();
@@ -994,12 +914,8 @@ namespace Zenject
                     if (memberType.IsArray && memberType.GetArrayRank() == 1)
                     {
                         var subType = memberType.GetElementType();
-
                         var subContext = context.Clone();
                         subContext.MemberType = subType;
-                        // By making this optional this means that all injected fields of type T[]
-                        // will pass validation, which could be error prone, but I think this is better
-                        // than always requiring that they explicitly mark their array types as optional
                         subContext.Optional = true;
 
                         var results = ZenPools.SpawnList<object>();
@@ -1015,7 +931,6 @@ namespace Zenject
                         }
                     }
 
-                    // If it's a generic list then try matching multiple instances to its generic type
                     if (memberType.IsGenericType()
                         && (memberType.GetGenericTypeDefinition() == typeof(List<>)
                             || memberType.GetGenericTypeDefinition() == typeof(IList<>)
@@ -1028,9 +943,6 @@ namespace Zenject
 
                         var subContext = context.Clone();
                         subContext.MemberType = subType;
-                        // By making this optional this means that all injected fields of type List<>
-                        // will pass validation, which could be error prone, but I think this is better
-                        // than always requiring that they explicitly mark their list types as optional
                         subContext.Optional = true;
 
                         return ResolveAll(subContext);
@@ -3287,8 +3199,6 @@ namespace Zenject
                         return InstantiateInternal(concreteType, autoInject, extraArgs, context, concreteIdentifier);
                     }
 
-                    // In this case, just log it and continue to print out multiple validation errors
-                    // at once
                     try
                     {
                         return InstantiateInternal(concreteType, autoInject, extraArgs, context, concreteIdentifier);
@@ -3335,8 +3245,7 @@ namespace Zenject
             return newObj;
         }
 
-        // Same as InstantiatePrefabResourceForComponent except allows null values
-        // to be included in the argument list.  Also see InjectUtil.CreateArgList
+
         public object InstantiatePrefabResourceForComponentExplicit(
             Type componentType, string resourcePath, List<TypeValuePair> extraArgs,
             GameObjectCreationParameters creationInfo)
@@ -3371,9 +3280,6 @@ namespace Zenject
             return InstantiatePrefabForComponentExplicit(
                 componentType, prefab, extraArgs, new InjectContext(this, componentType, null), null, gameObjectBindInfo);
         }
-
-        // Same as InstantiatePrefabForComponent except allows null values
-        // to be included in the argument list.  Also see InjectUtil.CreateArgList
         public object InstantiatePrefabForComponentExplicit(
             Type componentType, UnityEngine.Object prefab,
             List<TypeValuePair> extraArgs, InjectContext context, object concreteIdentifier, GameObjectCreationParameters gameObjectBindInfo)
@@ -3406,7 +3312,6 @@ namespace Zenject
         }
 #endif
 
-        ////////////// Execution order ////////////////
 
         public void BindExecutionOrder<T>(int order)
         {

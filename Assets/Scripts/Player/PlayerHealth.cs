@@ -26,12 +26,21 @@ public class PlayerHealth : ObjectHealth
         OnHealthChanged?.Invoke();
     }
 
+    public void FullHeal()
+    {
+        float missingHealth = MaxHealth - CurrentHealth;
+        if (missingHealth > 0)
+            TakeHeal(missingHealth);
+
+        OnHealthChanged?.Invoke();
+    }
+
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         OnHealthChanged?.Invoke();
         if (CurrentHealth <= 0)
-            Debug.Log("Èãðîê óìåð!");
+            Debug.Log(" !");
     }
 
 
