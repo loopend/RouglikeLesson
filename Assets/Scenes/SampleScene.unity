@@ -87642,6 +87642,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upgradeWindow: {fileID: 0}
+  _levelUpSound: {fileID: 8300000, guid: f58577c53b860ef428f3cb0de3b67dd3, type: 3}
+  _levelUpSoundVolume: 1
+  _baseExperienceToUp: 5
+  _earlyGameIncrement: 10
+  _midGameIncrement: 13
+  _lateGameIncrement: 16
 --- !u!1 &1830985988
 GameObject:
   m_ObjectHideFlags: 0
