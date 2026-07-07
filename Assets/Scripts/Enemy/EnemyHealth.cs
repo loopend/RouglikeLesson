@@ -1,3 +1,4 @@
+using Assets.Scripts.GameCore.ExperienceSystem;
 using Assets.Scripts.GameCore.UI;
 using System.Collections;
 
@@ -10,9 +11,9 @@ public class EnemyHealth : ObjectHealth
 {
     [SerializeField] private AudioClip _damageSound;
     [SerializeField] [Range(0f, 1f)] private float _damageSoundVolume = 0.35f;
-
     private WaitForSeconds _tick = new WaitForSeconds(1f);
     private DamageTextSpawner _damageTextSpawner;
+    private ExperienceSpawner _experienceSpawner;
 
     public override void TakeDamage(float damage)
     {
@@ -20,7 +21,11 @@ public class EnemyHealth : ObjectHealth
         _damageTextSpawner.Activate(transform, (int)damage);
         PlayDamageSound();
         if (CurrentHealth <= 0)
+        {
             gameObject.SetActive(false);
+            ChanceToDropExperience();
+        }
+            
     }
 
     private void PlayDamageSound()
@@ -29,6 +34,16 @@ public class EnemyHealth : ObjectHealth
             AudioSource.PlayClipAtPoint(_damageSound, transform.position, _damageSoundVolume);
     }
     public void Burn(float damage) => StartCoroutine(routine:StartBurn(damage));
+
+    private void ChanceToDropExperience()
+    {
+        if (Random.Range(0f, 100f) <= 33f)
+        {
+            _experienceSpawner.Spawn(transform.position);
+        }
+
+    }
+
     private IEnumerator StartBurn(float damage)
     {
         if (gameObject.activeSelf == false)
@@ -45,5 +60,10 @@ public class EnemyHealth : ObjectHealth
             //}
         }
     }
-    [Inject] private void Construct(DamageTextSpawner damageTextSpawner) => _damageTextSpawner = damageTextSpawner;
+    [Inject]
+    private void Construct(DamageTextSpawner damageTextSpawner, ExperienceSpawner experienceSpawner)
+    {
+        _experienceSpawner = experienceSpawner;
+        _damageTextSpawner = damageTextSpawner;
+    }
 }

@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.GameCore;
+using Assets.Scripts.GameCore.ExperienceSystem;
 using Assets.Scripts.GameCore.LevelSystem;
 using Assets.Scripts.GameCore.UI;
+using Assets.Scripts.GameCore.UpgradeSystem;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +11,9 @@ namespace Assets.Scripts.DI
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private DamageTextSpawner _damageTextSpawner;
+        [SerializeField] private ExperienceSpawner _experienceSpawner;
+        [SerializeField] private ExperienceSystem _experienceSystem;
+        [SerializeField] private PlayerUpgrade _playerUpgrade;
         [SerializeField] private LevelSystem _levelSystem;
         [SerializeField] private GameTimer _gameTimer;
         public override void InstallBindings()
@@ -17,6 +22,9 @@ namespace Assets.Scripts.DI
             Container.Bind<DamageTextSpawner>().FromInstance(_damageTextSpawner).AsSingle().NonLazy();
             Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
             Container.Bind<GameTimer>().FromInstance(_gameTimer).AsSingle().NonLazy();
+            Container.Bind<ExperienceSpawner>().FromInstance(_experienceSpawner).AsSingle().NonLazy();
+            Container.Bind<PlayerUpgrade>().FromInstance(_playerUpgrade).AsSingle().NonLazy();
+            Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
 
         }
     }
