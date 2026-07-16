@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.GameCore.UI;
 using Assets.Scripts.GameCore.UpgradeSystem;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,7 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         private ExperienceSystem _experienceSystem;
         private PlayerHealth _playerHealth;
         private PlayerUpgrade _playerUpgrade;
+        private ParticleEXPSpawner _particleEXPSpawner;
         private float _distanceToPickUp = 1.5f;
         private void OnEnable()
         {
@@ -26,6 +28,7 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
             if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
                 _experienceSystem.PickUpExperience(_value);
+                _particleEXPSpawner.Spawn(playerHealth.transform.position);
                 gameObject.SetActive(false);    
             }
         }
@@ -40,11 +43,16 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         }
 
         [Inject]
-        private void Construct(ExperienceSystem experienceSystem, PlayerHealth playerHealth, PlayerUpgrade playerUpgrade)
+        private void Construct(
+            ExperienceSystem experienceSystem,
+            PlayerHealth playerHealth,
+            PlayerUpgrade playerUpgrade,
+            ParticleEXPSpawner particleEXPSpawner)
         {
             _experienceSystem = experienceSystem;
             _playerHealth = playerHealth;   
-            _playerUpgrade = playerUpgrade; 
+            _playerUpgrade = playerUpgrade;
+            _particleEXPSpawner = particleEXPSpawner;
         }
 
 

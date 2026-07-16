@@ -31,6 +31,7 @@ namespace Assets.Scripts.Enemy
                 return;
 
             _isDying = true;
+            SpawnDeathParticles();
             _bossController.PlayDeath();
             StartCoroutine(BossDeathSequence());
         }
