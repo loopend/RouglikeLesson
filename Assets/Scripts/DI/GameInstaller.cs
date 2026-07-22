@@ -2,6 +2,7 @@
 using Assets.Scripts.GameCore;
 using Assets.Scripts.GameCore.ExperienceSystem;
 using Assets.Scripts.GameCore.LevelSystem;
+using Assets.Scripts.GameCore.Loot;
 using Assets.Scripts.GameCore.Pause;
 using Assets.Scripts.GameCore.UI;
 using Assets.Scripts.GameCore.UpgradeSystem;
@@ -23,6 +24,7 @@ namespace Assets.Scripts.DI
         [SerializeField] private BossSpawner _bossSpawner;
         [SerializeField] private ParticleDamageSpawner _particleDamageSpawner;
         [SerializeField] private ParticleEXPSpawner _particleEXPSpawner;
+        [SerializeField] private CoinsUIUpdater _coinsUIUpdater;
         public override void InstallBindings()
         {
             LevelSystem();
@@ -34,6 +36,9 @@ namespace Assets.Scripts.DI
             Container.Bind<ParticleDamageSpawner>().FromInstance(_particleDamageSpawner).AsSingle().NonLazy();
             Container.Bind<UpgradeWindow>().FromInstance(_upgradeWindow).AsSingle().NonLazy();
             Container.Bind<GamePause>().FromInstance(_gamePause).AsSingle().NonLazy();
+            Container.Bind<CoinsKeeper>().FromNew().AsSingle().NonLazy();
+            Container.Bind<CoinsUIUpdater>().FromInstance(_coinsUIUpdater).AsSingle().NonLazy();
+
         }
         private void Experince()
         {
