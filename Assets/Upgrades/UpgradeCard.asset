@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff28c73781cc61429faede694fd994d, type: 3}
+  m_Name: UpgradeCard
+  m_EditorClassIdentifier: 
+  _name: Health
+  _description: =10 HP
+  _icon: {fileID: 1597292964, guid: 4cf2f913f496f8d4d81ee6381ee09c01, type: 3}
+  _id: 1

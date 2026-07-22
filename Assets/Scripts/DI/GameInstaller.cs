@@ -15,6 +15,7 @@ namespace Assets.Scripts.DI
         [SerializeField] private ExperienceSpawner _experienceSpawner;
         [SerializeField] private ExperienceSystem _experienceSystem;
         [SerializeField] private PlayerUpgrade _playerUpgrade;
+        [SerializeField] private UpgradeWindow _upgradeWindow;
         [SerializeField] private LevelSystem _levelSystem;
         [SerializeField] private GameTimer _gameTimer;
         [SerializeField] private BossSpawner _bossSpawner;
@@ -22,16 +23,25 @@ namespace Assets.Scripts.DI
         [SerializeField] private ParticleEXPSpawner _particleEXPSpawner;
         public override void InstallBindings()
         {
+            LevelSystem();
+            Experince();
             Container.Bind<GetRandomSpawnPoint>().FromNew().AsSingle().NonLazy();
             Container.Bind<DamageTextSpawner>().FromInstance(_damageTextSpawner).AsSingle().NonLazy();
-            Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
-            Container.Bind<GameTimer>().FromInstance(_gameTimer).AsSingle().NonLazy();
-            Container.Bind<ExperienceSpawner>().FromInstance(_experienceSpawner).AsSingle().NonLazy();
             Container.Bind<PlayerUpgrade>().FromInstance(_playerUpgrade).AsSingle().NonLazy();
-            Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
             Container.Bind<BossSpawner>().FromInstance(_bossSpawner).AsSingle().NonLazy();
             Container.Bind<ParticleDamageSpawner>().FromInstance(_particleDamageSpawner).AsSingle().NonLazy();
+            Container.Bind<UpgradeWindow>().FromInstance(_upgradeWindow).AsSingle().NonLazy();
+        }
+        private void Experince()
+        {
+            Container.Bind<ExperienceSpawner>().FromInstance(_experienceSpawner).AsSingle().NonLazy();
+            Container.Bind<ExperienceSystem>().FromInstance(_experienceSystem).AsSingle().NonLazy();
             Container.Bind<ParticleEXPSpawner>().FromInstance(_particleEXPSpawner).AsSingle().NonLazy();
+        }
+        private void LevelSystem()
+        {
+            Container.Bind<LevelSystem>().FromInstance(_levelSystem).AsSingle().NonLazy();
+            Container.Bind<GameTimer>().FromInstance(_gameTimer).AsSingle().NonLazy();
         }
     }
 }
