@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -38,9 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (_movement.magnitude > 1f)
             _movement.Normalize();
-        transform.position += _movement * (_moveSpeed * Time.deltaTime);
-        _animator.SetFloat("Horizontal", _movement.x);
-        _animator.SetFloat("Vertical", _movement.y);
-        _animator.SetFloat("Speed", _movement.sqrMagnitude);
+            transform.position += _movement * (_moveSpeed * Time.deltaTime);
+            _animator.SetFloat("Horizontal", _movement.x);
+            _animator.SetFloat("Vertical", _movement.y);
+            _animator.SetFloat("Speed", _movement.sqrMagnitude);
     }
+    public void UpgradeSpeed()
+    {
+        _moveSpeed += 0.3f;
+    }
+
+
 }

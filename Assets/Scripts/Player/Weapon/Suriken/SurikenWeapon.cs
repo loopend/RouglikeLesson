@@ -29,13 +29,6 @@ namespace Assets.Scripts.Player.Weapon.Suriken
         private void OnEnable()
         {
             Activate();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
         }
 
         public void Activate()

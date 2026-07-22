@@ -2,6 +2,7 @@
 using Assets.Scripts.GameCore;
 using Assets.Scripts.GameCore.ExperienceSystem;
 using Assets.Scripts.GameCore.LevelSystem;
+using Assets.Scripts.GameCore.Pause;
 using Assets.Scripts.GameCore.UI;
 using Assets.Scripts.GameCore.UpgradeSystem;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Assets.Scripts.DI
         [SerializeField] private UpgradeWindow _upgradeWindow;
         [SerializeField] private LevelSystem _levelSystem;
         [SerializeField] private GameTimer _gameTimer;
+        [SerializeField] private GamePause _gamePause;
         [SerializeField] private BossSpawner _bossSpawner;
         [SerializeField] private ParticleDamageSpawner _particleDamageSpawner;
         [SerializeField] private ParticleEXPSpawner _particleEXPSpawner;
@@ -31,6 +33,7 @@ namespace Assets.Scripts.DI
             Container.Bind<BossSpawner>().FromInstance(_bossSpawner).AsSingle().NonLazy();
             Container.Bind<ParticleDamageSpawner>().FromInstance(_particleDamageSpawner).AsSingle().NonLazy();
             Container.Bind<UpgradeWindow>().FromInstance(_upgradeWindow).AsSingle().NonLazy();
+            Container.Bind<GamePause>().FromInstance(_gamePause).AsSingle().NonLazy();
         }
         private void Experince()
         {

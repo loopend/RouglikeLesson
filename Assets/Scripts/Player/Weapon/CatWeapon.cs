@@ -33,13 +33,6 @@ namespace Assets.Scripts.Player.Weapon
 
             SetStats(0);
             Activate();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
         }
 
         private void LateUpdate()

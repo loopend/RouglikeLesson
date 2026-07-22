@@ -58,13 +58,6 @@ namespace Assets.Scripts.Player.Weapon.Bow
         private void OnEnable()
         {
             Activate();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
         }
 
         private void Update()

@@ -24,13 +24,6 @@ namespace Assets.Scripts.Player.Weapon
         {
             SetStats(0);
             Activate();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)

@@ -40,8 +40,19 @@ public class PlayerHealth : ObjectHealth
         base.TakeDamage(damage);
         OnHealthChanged?.Invoke();
         if (CurrentHealth <= 0)
-            Debug.Log(" !");
+            Debug.Log("!");
     }
+    
+    public void UpgradeHeath()
+    {
+        _currentHealth += 10;
+        _maxHealth += 10;
+    }
+    public void UpgradeRegeneration()
+    {
+        _regenerationValue++;
+    }
+
 
 
     public void ApplyDamageOverTime(float damageTick, float duration)

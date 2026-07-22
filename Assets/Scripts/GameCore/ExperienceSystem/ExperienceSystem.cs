@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.GameCore.UpgradeSystem;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.GameCore.ExperienceSystem
@@ -50,6 +51,8 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         {
             _currentExperience -= _experienceToUp;
             _currentLevel++;
+            _upgradeWindow.SetActive(true);
+            _upgradeWindow.GetComponent<UpgradeWindow>().GetRandomCard();
             _experienceToUp += GetExperienceIncrement(_currentLevel);
 
             OnLevelUp?.Invoke(_currentLevel);

@@ -1,17 +1,7 @@
 ﻿using Assets.Scripts.GameCore;
-
-
-
 using System.Collections;
-
 using System.Collections.Generic;
-
-
-
 using UnityEngine;
-
-
-
 using TMPro;
 
 
@@ -43,13 +33,6 @@ namespace Assets.Scripts.Player.Weapon
             CacheColliderReferences();
             SetStats(0);
             SetupWeapon();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            //LevelUp();
-            //LevelUp();
 
         }
 

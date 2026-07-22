@@ -27,14 +27,6 @@ namespace Assets.Scripts.Player.Weapon.FrostBolt
         private void OnEnable()
         {
             Activate();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            
         }
         public void Activate()
         {

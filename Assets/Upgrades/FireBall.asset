@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ff28c73781cc61429faede694fd994d, type: 3}
-  m_Name: UpgradeCard
+  m_Name: FireBall
   m_EditorClassIdentifier: 
-  _name: Health
-  _description: =10 HP
-  _icon: {fileID: 1597292964, guid: 4cf2f913f496f8d4d81ee6381ee09c01, type: 3}
-  _id: 1
+  _name: Fireball
+  _description: + 1 level
+  _icon: {fileID: -1396105359, guid: 4cf2f913f496f8d4d81ee6381ee09c01, type: 3}
+  _id: 5
