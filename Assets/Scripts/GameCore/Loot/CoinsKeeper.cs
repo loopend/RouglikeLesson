@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.GameCore.Loot
@@ -9,5 +10,16 @@ namespace Assets.Scripts.GameCore.Loot
 
 
         public void AddCoin() => Coins++;
+        public void AddCoins(int value)
+        {
+            if (value > 0)
+            {
+                Coins += value;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException(nameof(value));
+            }
+        }
     }
 }

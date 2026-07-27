@@ -25,6 +25,8 @@ namespace Assets.Scripts.DI
         [SerializeField] private ParticleDamageSpawner _particleDamageSpawner;
         [SerializeField] private ParticleEXPSpawner _particleEXPSpawner;
         [SerializeField] private CoinsUIUpdater _coinsUIUpdater;
+        [SerializeField] private TreasureWindow _treasureWindow;
+        [SerializeField] private RewardCoinsAnimation  _rewardCoinsAnimation;
         public override void InstallBindings()
         {
             LevelSystem();
@@ -38,6 +40,8 @@ namespace Assets.Scripts.DI
             Container.Bind<GamePause>().FromInstance(_gamePause).AsSingle().NonLazy();
             Container.Bind<CoinsKeeper>().FromNew().AsSingle().NonLazy();
             Container.Bind<CoinsUIUpdater>().FromInstance(_coinsUIUpdater).AsSingle().NonLazy();
+            Container.Bind<TreasureWindow>().FromInstance(_treasureWindow).AsSingle().NonLazy();
+            Container.Bind<RewardCoinsAnimation>().FromInstance(_rewardCoinsAnimation).AsSingle().NonLazy();
 
         }
         private void Experince()
