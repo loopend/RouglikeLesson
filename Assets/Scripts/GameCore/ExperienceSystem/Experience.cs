@@ -13,6 +13,9 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
     public class Experience : MonoBehaviour
     {
         [SerializeField] private int _value;
+        [SerializeField] private AudioClip _pickupSound;
+        [SerializeField] [Range(0f, 1f)] private float _pickupSoundVolume = 1f;
+
         private ExperienceSystem _experienceSystem;
         private PlayerHealth _playerHealth;
         private PlayerUpgrade _playerUpgrade;
@@ -27,6 +30,9 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         {
             if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
+                if (_pickupSound != null)
+                    AudioSource.PlayClipAtPoint(_pickupSound, transform.position, _pickupSoundVolume);
+
                 _experienceSystem.PickUpExperience(_value);
                 _particleEXPSpawner.Spawn(playerHealth.transform.position);
                 gameObject.SetActive(false);    
