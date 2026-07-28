@@ -1,4 +1,5 @@
 using Assets.Scripts.GameCore.ExperienceSystem;
+using Assets.Scripts.GameCore.Loot;
 using Assets.Scripts.GameCore.UI;
 using System.Collections;
 
@@ -15,6 +16,7 @@ public class EnemyHealth : ObjectHealth
     private DamageTextSpawner _damageTextSpawner;
     private ExperienceSpawner _experienceSpawner;
     private ParticleDamageSpawner _particleDamageSpawner;
+    private HeartSpawner _heartSpawner;
 
     public override void TakeDamage(float damage)
     {
@@ -28,8 +30,14 @@ public class EnemyHealth : ObjectHealth
     protected virtual void HandleDeath()
     {
         SpawnDeathParticles();
+        RegisterKillForHeartDrop();
         gameObject.SetActive(false);
         ChanceToDropExperience();
+    }
+
+    protected void RegisterKillForHeartDrop()
+    {
+        _heartSpawner.RegisterKill(transform.position);
     }
 
     protected void SpawnDeathParticles()
@@ -73,10 +81,12 @@ public class EnemyHealth : ObjectHealth
     private void Construct(
         DamageTextSpawner damageTextSpawner,
         ExperienceSpawner experienceSpawner,
-        ParticleDamageSpawner particleDamageSpawner)
+        ParticleDamageSpawner particleDamageSpawner,
+        HeartSpawner heartSpawner)
     {
         _experienceSpawner = experienceSpawner;
         _damageTextSpawner = damageTextSpawner;
         _particleDamageSpawner = particleDamageSpawner;
+        _heartSpawner = heartSpawner;
     }
 }
