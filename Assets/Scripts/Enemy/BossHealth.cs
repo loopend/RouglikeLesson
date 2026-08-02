@@ -33,6 +33,7 @@ namespace Assets.Scripts.Enemy
             _isDying = true;
             SpawnDeathParticles();
             RegisterKillForHeartDrop();
+            TryDropBomb();
             _bossController.PlayDeath();
             StartCoroutine(BossDeathSequence());
         }

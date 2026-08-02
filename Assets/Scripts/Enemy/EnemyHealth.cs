@@ -17,6 +17,7 @@ public class EnemyHealth : ObjectHealth
     private ExperienceSpawner _experienceSpawner;
     private ParticleDamageSpawner _particleDamageSpawner;
     private HeartSpawner _heartSpawner;
+    private BombSpawner _bombSpawner;
 
     public override void TakeDamage(float damage)
     {
@@ -31,8 +32,14 @@ public class EnemyHealth : ObjectHealth
     {
         SpawnDeathParticles();
         RegisterKillForHeartDrop();
+        TryDropBomb();
         gameObject.SetActive(false);
         ChanceToDropExperience();
+    }
+
+    protected void TryDropBomb()
+    {
+        _bombSpawner.TrySpawn(transform.position);
     }
 
     protected void RegisterKillForHeartDrop()
@@ -82,11 +89,13 @@ public class EnemyHealth : ObjectHealth
         DamageTextSpawner damageTextSpawner,
         ExperienceSpawner experienceSpawner,
         ParticleDamageSpawner particleDamageSpawner,
-        HeartSpawner heartSpawner)
+        HeartSpawner heartSpawner,
+        BombSpawner bombSpawner)
     {
         _experienceSpawner = experienceSpawner;
         _damageTextSpawner = damageTextSpawner;
         _particleDamageSpawner = particleDamageSpawner;
         _heartSpawner = heartSpawner;
+        _bombSpawner = bombSpawner;
     }
 }

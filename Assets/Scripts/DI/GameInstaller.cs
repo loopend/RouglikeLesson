@@ -29,6 +29,8 @@ namespace Assets.Scripts.DI
         [SerializeField] private TreasureWindow _treasureWindow;
         [SerializeField] private RewardCoinsAnimation  _rewardCoinsAnimation;
         [SerializeField] private HeartSpawner _heartSpawner;
+        [SerializeField] private BombSpawner _bombSpawner;
+        [SerializeField] private ParticleBombSpawner _particleBombSpawner;
         public override void InstallBindings()
         {
             LevelSystem();
@@ -39,6 +41,7 @@ namespace Assets.Scripts.DI
             Container.Bind<BossSpawner>().FromInstance(_bossSpawner).AsSingle().NonLazy();
             Container.Bind<ParticleDamageSpawner>().FromInstance(_particleDamageSpawner).AsSingle().NonLazy();
             Container.Bind<ParticleHPSpawner>().FromInstance(_particleHPSpawner).AsSingle().NonLazy();
+            Container.Bind<ParticleBombSpawner>().FromInstance(_particleBombSpawner).AsSingle().NonLazy();
             Container.Bind<UpgradeWindow>().FromInstance(_upgradeWindow).AsSingle().NonLazy();
             Container.Bind<GamePause>().FromInstance(_gamePause).AsSingle().NonLazy();
             Container.Bind<CoinsKeeper>().FromNew().AsSingle().NonLazy();
@@ -46,6 +49,7 @@ namespace Assets.Scripts.DI
             Container.Bind<TreasureWindow>().FromInstance(_treasureWindow).AsSingle().NonLazy();
             Container.Bind<RewardCoinsAnimation>().FromInstance(_rewardCoinsAnimation).AsSingle().NonLazy();
             Container.Bind<HeartSpawner>().FromInstance(_heartSpawner).AsSingle().NonLazy();
+            Container.Bind<BombSpawner>().FromInstance(_bombSpawner).AsSingle().NonLazy();
         }
         private void Experince()
         {
