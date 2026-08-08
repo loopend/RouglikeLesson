@@ -1,3 +1,4 @@
+using Assets.Scripts.GameCore.Pause;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,7 @@ public class EnemyMove : MonoBehaviour
     private WaitForSeconds _freeze = new WaitForSeconds(3f);
     private Coroutine _distanceToHide;
     private float _initialSpeed;
+    private GamePause _gamePause;
 
     private float _movementSpeedMultiplier = 1f;
     private bool _isStopped;
@@ -63,6 +65,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Move()
     {
+        _moveSpeed = _gamePause._isStopped ? 0f : _initialSpeed;
         if (_isStopped)
             return;
 
@@ -101,5 +104,10 @@ public class EnemyMove : MonoBehaviour
         _isStopped = false;
     }
 
-    [Inject] private void Construct(PlayerMovement playerMovement) => _playerMovement = playerMovement;
+    [Inject]
+    private void Construct(PlayerMovement playerMovement, GamePause gamePause)
+    {
+        _playerMovement = playerMovement;
+        _gamePause = gamePause;
+    }
 }

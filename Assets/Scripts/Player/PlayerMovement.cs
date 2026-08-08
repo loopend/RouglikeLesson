@@ -1,11 +1,15 @@
+using Assets.Scripts.GameCore.Pause;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zenject;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private Animator _animator;
     private Vector3 _movement;
+    private GamePause _gamePause;
+    private float _initialSpeed;
     public Vector3 Movement => _movement;
 
     [SerializeField] private Joystick _joystick; 
@@ -13,6 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     public bool IsUsingJoystick => _useJoystick;
+
+    private void Start()
+    {
+        _initialSpeed = _moveSpeed;
+    }
+
+
 
     private void Update() => Move();
 
@@ -24,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        _moveSpeed = _gamePause._isStopped ? 0 : _initialSpeed;
         if (_useJoystick)
         {
             _movement = new Vector3(_joystick.Horizontal, _joystick.Vertical, 0);
@@ -47,7 +59,12 @@ public class PlayerMovement : MonoBehaviour
     public void UpgradeSpeed()
     {
         _moveSpeed += 0.3f;
+        _initialSpeed = _moveSpeed;
     }
-
+    [Inject]
+    private void Construct(GamePause gamePause)
+    {
+        _gamePause = gamePause;
+    }
 
 }
