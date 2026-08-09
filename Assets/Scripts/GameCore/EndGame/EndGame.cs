@@ -3,6 +3,7 @@ using Assets.Scripts.GameCore.Pause;
 using Assets.Scripts.GameCore.UI;
 using Assets.Scripts.Player;
 using Assets.Scripts.Save3;
+using Assets.Scripts.ScenesLoader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Assets.Scripts.GameCore.EndGame
         private CoinsKeeper _coinsKeeper;
         private PlayerData _playerData;
         private SaveProgress _saveProgress;
-
+        private SceneLoader _sceneLoader;
         private GamePause _gamePause;
 
         private void OnEnable()
@@ -44,7 +45,7 @@ namespace Assets.Scripts.GameCore.EndGame
         {
             _playerData.AddRewardCoins(_coins);
             _saveProgress.SaveData();
-            SceneManager.LoadSceneAsync(0); 
+            _sceneLoader.MainMenu();
         }
 
         private IEnumerator CalculateCoins()
@@ -67,13 +68,14 @@ namespace Assets.Scripts.GameCore.EndGame
 
         [Inject]
         private void Construst(RewardCoinsAnimation coinsAnimation, CoinsKeeper coinsKeeper, 
-            PlayerData playerData, SaveProgress saveProgress, GamePause gamePause)
+            PlayerData playerData, SaveProgress saveProgress, GamePause gamePause, SceneLoader sceneLoader)
         {
             _rewardCoinsAnimation = coinsAnimation;
             _coinsKeeper = coinsKeeper;
             _playerData = playerData;
             _saveProgress = saveProgress;
             _gamePause = gamePause;
+            _sceneLoader = sceneLoader;
         }
     }
 }

@@ -19,11 +19,11 @@ namespace Assets.Scripts.Player
             }
             Coins -= value;
         }
-        public void AddCoin() => Coins++;
+        public void AddCoin(int v) => Coins++;
 
         public void AddRewardCoins(int value)
         {
-            if (value <= 0)
+            if (value < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
@@ -53,7 +53,9 @@ namespace Assets.Scripts.Player
             }
         }
 
-
-
+        internal void SetUpgradeIndex(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
