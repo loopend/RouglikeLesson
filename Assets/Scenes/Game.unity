@@ -7142,7 +7142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exti game
+  m_text: Exit game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 105299795b534d343a513d2f3bc0ee38, type: 2}
   m_sharedMaterial: {fileID: 7238218528128116761, guid: 105299795b534d343a513d2f3bc0ee38, type: 2}
@@ -93927,7 +93927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1478283000
 RectTransform:
   m_ObjectHideFlags: 0
