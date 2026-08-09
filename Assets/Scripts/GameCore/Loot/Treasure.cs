@@ -7,7 +7,7 @@ namespace Assets.Scripts.GameCore.Loot
     public class Treasure : Loot
     {
         [SerializeField] private AudioClip _pickupSound;
-        [SerializeField] [Range(0f, 1f)] private float _pickupSoundVolume = 1f;
+        [SerializeField] [Range(0f, 1f)] private float _pickupSoundVolume = 0.5f;
 
         private TreasureWindow _treasureWindow;
 

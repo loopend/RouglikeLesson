@@ -1,6 +1,8 @@
+using Assets.Scripts.GameCore.Pause;
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class PlayerHealth : ObjectHealth
 {
@@ -9,9 +11,13 @@ public class PlayerHealth : ObjectHealth
     [SerializeField] private float _regenerationValue = 1f;
     [SerializeField] private float _regenerationDelay = 5f;
     [SerializeField] private float _DOTDelay = 1f;
-
+    [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject _endGameWindow;
     private WaitForSeconds _regenInterval;
     private WaitForSeconds _damageOverTimeInterval;
+    private WaitForSeconds _interval = new WaitForSeconds(1f);
+    private GamePause _gamePause;
+
 
     private void Start()
     {
@@ -40,7 +46,7 @@ public class PlayerHealth : ObjectHealth
         base.TakeDamage(damage);
         OnHealthChanged?.Invoke();
         if (CurrentHealth <= 0)
-            Debug.Log("!");
+            StartCoroutine(routine: PlayerDied());
     }
     
     public void UpgradeHeath()
@@ -82,5 +88,20 @@ public class PlayerHealth : ObjectHealth
             }
             yield return _regenInterval;
         }
+    }
+    private IEnumerator PlayerDied()
+    {
+        _gamePause.SetPause(true);
+        _animator.SetTrigger(name:"Die");
+        yield return _interval;
+        _endGameWindow.SetActive(true);
+    }
+
+
+
+    [Inject]
+    private void Construct(GamePause gamePause)
+    {
+        _gamePause = gamePause;
     }
 }
