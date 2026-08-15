@@ -57,9 +57,10 @@ namespace Assets.Scripts.GameCore.EndGame
             else
             {
                 _coinsText.text = _coins.ToString();
-                _endButton.gameObject.SetActive(true);
             }
+
             yield return _interval;
+            _endButton.gameObject.SetActive(true);
         }
 
 

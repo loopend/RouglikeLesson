@@ -19,11 +19,12 @@ namespace Assets.Scripts.Save3
             PlayerPrefs.SetInt("Speed",_playerData.SpeedUpgradeIndex);
             PlayerPrefs.SetInt("Regen",_playerData.RegenerationUpgradeIndex);
             PlayerPrefs.SetInt("Range",_playerData.ExpRangeUpgradeIndex);
+            PlayerPrefs.Save();
         }
 
         public void LoadData()
         {
-            _playerData.AddCoin(PlayerPrefs.GetInt(key: "Coins"));
+            _playerData.AddRewardCoins(PlayerPrefs.GetInt(key: "Coins"));
             _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Health"), id:1);
             if (PlayerPrefs.GetInt(key: "Health") == 0)
             {
