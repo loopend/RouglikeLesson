@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.ScenesLoader;
+﻿using Assets.Scripts.Menu.Shop;
+using Assets.Scripts.ScenesLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Menu
 
         private SceneLoader _sceneLoader;
         private MenuUIUpdater _menuUIUpdater;
+        private GameShop _gameShop;
 
         private void OnEnable()
         {
@@ -37,6 +39,8 @@ namespace Assets.Scripts.Menu
         {
             _shopWindow.SetActive(true);
             _menuUIUpdater.UpdateUI();
+            _gameShop.ShowPrice();
+            _gameShop.CheckButtons();
         }
          private void StartGame()
         {
@@ -44,10 +48,11 @@ namespace Assets.Scripts.Menu
         }
 
         [Inject]
-        private void Construct(SceneLoader sceneLoader, MenuUIUpdater menuUIUpdater)
+        private void Construct(SceneLoader sceneLoader, MenuUIUpdater menuUIUpdater, GameShop gameShop)
         {
             _sceneLoader = sceneLoader;
             _menuUIUpdater = menuUIUpdater;
+            _gameShop = gameShop; 
         }
     }
 }
