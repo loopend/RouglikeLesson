@@ -29,17 +29,17 @@ namespace Assets.Scripts.Save3
             {
                 _playerData.SetUpgradeIndex(1, id: 1);
             }
-            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Speed"), id:1);
+            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Speed"), id:2);
             if (PlayerPrefs.GetInt(key: "Speed") == 0)
             {
                 _playerData.SetUpgradeIndex(1, id: 2);
             }
-            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Regen"), id:1);
+            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Regen"), id:3);
             if (PlayerPrefs.GetInt(key: "Regen") == 0)
             {
                 _playerData.SetUpgradeIndex(1, id: 3);
             }
-            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Range"), id:1);
+            _playerData.SetUpgradeIndex(PlayerPrefs.GetInt(key: "Range"), id:4);
             if (PlayerPrefs.GetInt(key: "Range") == 0)
             {
                 _playerData.SetUpgradeIndex(1, id: 4);

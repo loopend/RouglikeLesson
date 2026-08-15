@@ -17,16 +17,17 @@ namespace Assets.Scripts.Menu.Shop
 
 
 
-        public ItemShop HealthCurrentLevel { get; private set; }
-        public ItemShop SpeedCurrentLevel { get; private set; }
-        public ItemShop RegenCurrentLevel { get; private set; }
-        public ItemShop RangeCurrentLevel { get; private set; }
+        public ItemShop HealthCurrentLevel {get; private set;}
+        public ItemShop SpeedCurrentLevel {get; private set;}
+        public ItemShop RegenCurrentLevel {get; private set;}
+        public ItemShop RangeCurrentLevel {get; private set;}
         private PlayerData _playerData;
         private SaveProgress _saveProgress;
 
         private void Awake()
         {
             _saveProgress.LoadData();
+            LoadCurrentLevels();
         }
 
         public void LoadCurrentLevels()

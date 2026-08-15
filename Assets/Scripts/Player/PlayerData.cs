@@ -11,6 +11,7 @@ namespace Assets.Scripts.Player
         public int SpeedUpgradeIndex { get; private set; }
         public int RegenerationUpgradeIndex { get; private set; }
         public int ExpRangeUpgradeIndex { get; private set; }
+
         public void TrySpendCoins(int value)
         {
             if (value <= 0 || value > Coins)
@@ -43,11 +44,11 @@ namespace Assets.Scripts.Player
             {
                 SpeedUpgradeIndex = value;  
             }
-            else if (id == 2)
+            else if (id == 3)
             {
                 RegenerationUpgradeIndex = value;
             }
-            else if (id == 2)
+            else if (id == 4)
             {
                 ExpRangeUpgradeIndex = value;
             }

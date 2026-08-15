@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Player;
-using UnityEditor;
+﻿using Assets.Scripts.Menu;
+using Assets.Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,18 +10,19 @@ namespace Assets.Scripts.Menu.Shop
     {
         [SerializeField] private Button _button;
         private PlayerData _playerData;
+        private MenuUIUpdater _menuUIUpdater;
+
         public void AddCoins()
         {
             _playerData.AddRewardCoins(1000);
+            _menuUIUpdater.UpdateUI();
         }
+
         [Inject]
-        private void Construct(PlayerData playerData)
+        private void Construct(PlayerData playerData, MenuUIUpdater menuUIUpdater)
         {
             _playerData = playerData;
+            _menuUIUpdater = menuUIUpdater;
         }
-        //public void ResetData()
-        //{
-        //    _playerData.SetUpgradeIndex();
-        //}
     }
 }
