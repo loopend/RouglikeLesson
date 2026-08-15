@@ -16,12 +16,12 @@ namespace Assets.Scripts.DI
     public class MenuInstaller : MonoInstaller
     {
         [SerializeField] private MenuUIUpdater _menuUIUpdater;
-        [SerializeField] private UpgradeLoader _upgradeLoader;
+        
         [SerializeField] private GameShop _gameShop;
         public override void InstallBindings()
         {
             Container.Bind<MenuUIUpdater>().FromInstance(_menuUIUpdater);
-            Container.Bind<UpgradeLoader>().FromInstance(_upgradeLoader);
+            
             Container.Bind<GameShop>().FromInstance(_gameShop);
         }
     }

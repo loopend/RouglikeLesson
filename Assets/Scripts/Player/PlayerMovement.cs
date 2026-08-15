@@ -1,4 +1,6 @@
 using Assets.Scripts.GameCore.Pause;
+using Assets.Scripts.GameCore.UpgradeSystem;
+using Assets.Scripts.Menu.Shop;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -11,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private GamePause _gamePause;
     private float _initialSpeed;
     public Vector3 Movement => _movement;
+    private UpgradeLoader _upgradeLoader;
 
     [SerializeField] private Joystick _joystick; 
     private bool _useJoystick = false;
@@ -20,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        _moveSpeed = _upgradeLoader.SpeedCurrentLevel.Value;
         _initialSpeed = _moveSpeed;
     }
 
@@ -62,9 +66,10 @@ public class PlayerMovement : MonoBehaviour
         _initialSpeed = _moveSpeed;
     }
     [Inject]
-    private void Construct(GamePause gamePause)
+    private void Construct(GamePause gamePause, UpgradeLoader upgradeLoader)
     {
         _gamePause = gamePause;
+        _upgradeLoader = upgradeLoader;
     }
 
 }

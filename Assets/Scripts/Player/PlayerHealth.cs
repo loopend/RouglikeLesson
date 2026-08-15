@@ -1,4 +1,6 @@
 using Assets.Scripts.GameCore.Pause;
+using Assets.Scripts.Menu.Shop;
+using Assets.Scripts.Player;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -17,13 +19,16 @@ public class PlayerHealth : ObjectHealth
     private WaitForSeconds _damageOverTimeInterval;
     private WaitForSeconds _interval = new WaitForSeconds(1f);
     private GamePause _gamePause;
-
+    private UpgradeLoader _upgradeLoader;
 
     private void Start()
     {
         _regenInterval = new WaitForSeconds(_regenerationDelay);
         _damageOverTimeInterval = new WaitForSeconds(_DOTDelay);
         StartCoroutine(Regeneration());
+        _maxHealth = _upgradeLoader.HealthCurrentLevel.Value;
+        _currentHealth = _maxHealth;
+        _regenerationValue = _upgradeLoader.RegenCurrentLevel.Value;
     }
 
     public void Heal(float value)
@@ -100,8 +105,9 @@ public class PlayerHealth : ObjectHealth
 
 
     [Inject]
-    private void Construct(GamePause gamePause)
+    private void Construct(GamePause gamePause, UpgradeLoader upgradeLoader)
     {
         _gamePause = gamePause;
+        _upgradeLoader = upgradeLoader;
     }
 }

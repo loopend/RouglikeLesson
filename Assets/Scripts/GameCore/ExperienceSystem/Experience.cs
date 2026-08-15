@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.GameCore.UI;
 using Assets.Scripts.GameCore.UpgradeSystem;
+using Assets.Scripts.Menu.Shop;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +22,11 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
         private PlayerUpgrade _playerUpgrade;
         private ParticleEXPSpawner _particleEXPSpawner;
         private float _distanceToPickUp = 1.5f;
+        private UpgradeLoader _upgradeLoader;
+        private void Start()
+        {
+            _distanceToPickUp = _upgradeLoader.RangeCurrentLevel.Value;
+        }
         private void OnEnable()
         {
             _distanceToPickUp = _playerUpgrade.RangeExp;
@@ -53,12 +59,13 @@ namespace Assets.Scripts.GameCore.ExperienceSystem
             ExperienceSystem experienceSystem,
             PlayerHealth playerHealth,
             PlayerUpgrade playerUpgrade,
-            ParticleEXPSpawner particleEXPSpawner)
+            ParticleEXPSpawner particleEXPSpawner, UpgradeLoader upgradeLoader)
         {
             _experienceSystem = experienceSystem;
             _playerHealth = playerHealth;   
             _playerUpgrade = playerUpgrade;
             _particleEXPSpawner = particleEXPSpawner;
+            _upgradeLoader = upgradeLoader;
         }
 
 
