@@ -22,6 +22,12 @@ namespace Assets.Scripts.Save3
             PlayerPrefs.Save();
         }
 
+        public void ResetData()
+        {
+            _playerData.ResetProgress();
+            SaveData();
+        }
+
         public void LoadData()
         {
             _playerData.AddRewardCoins(PlayerPrefs.GetInt(key: "Coins"));

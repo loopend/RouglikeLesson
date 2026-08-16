@@ -30,6 +30,16 @@ namespace Assets.Scripts.Player
             }
             Coins += value;
         }
+
+        public void ResetProgress()
+        {
+            Coins = 0;
+            MaxHealthUpgradeIndex = 1;
+            SpeedUpgradeIndex = 1;
+            RegenerationUpgradeIndex = 1;
+            ExpRangeUpgradeIndex = 1;
+        }
+
          public void SetUpgradeIndex(int value, int id)
         {
             if (value < 0 || value > 5)

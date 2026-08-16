@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 13883916}
   - component: {fileID: 13883918}
   - component: {fileID: 13883920}
-  - component: {fileID: 13883921}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -158,6 +157,10 @@ MonoBehaviour:
   _shopButton: {fileID: 1305702186}
   _closeButton: {fileID: 2027290100}
   _shopWindow: {fileID: 2050832052}
+  _resetGameButton: {fileID: 878653865}
+  _yesButton: {fileID: 1243863915}
+  _noButton: {fileID: 699962353}
+  _resetGameWindow: {fileID: 476297978}
 --- !u!4 &13883917
 Transform:
   m_ObjectHideFlags: 0
@@ -206,19 +209,6 @@ MonoBehaviour:
   _speedButton: {fileID: 26027548}
   _regenButton: {fileID: 902361153}
   _rangeButton: {fileID: 950548759}
---- !u!114 &13883921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13883915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce4e0d2ccd55c34384471a3c655666e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 0}
 --- !u!1 &26027546
 GameObject:
   m_ObjectHideFlags: 0
